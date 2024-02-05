@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>세미 프로젝트 - login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{url_for('static', path='css/base.css')}}">
+    <style>
+        /*로그인폼에 대한 스타일*/
+        form { width: 370px; margin: 100px auto;}
+        form div { margin-bottom: 5px; }
+        form label { font-weight: bold; width: 110px; text-align: right; }
+        form button:first-child { margin-left: 135px; }
+
+
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+        <header><h1>세미 프로젝트 V1</h1></header>
+        <nav>
+            <ul class="list-inline row text-center justify-content-evenly mt-5">
+                <li class="col-2"><a href="/">Home</a></li>
+                <li class="col-2"><a href="/join">회원가입</a></li>
+                <li class="col-2"><a href="/login">로그인</a></li>
+                <li class="col-2"><a href="/board/list">게시판</a></li>
+                <li class="col-2"><a href="/myinfo">회원정보</a></li>
+            </ul>
+            <hr>
+        </nav>
+
+        <main>
+            <h2>로그인</h2>
+            <div id="login">
+                <form name="loginfrm">
+                    <div class="row">
+                        <div class="col-auto"><label for="userid" class="col-form-label">아이디</label></div>
+                        <div class="col-auto"><input type="text" name="userid" id="userid"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto"><label for="userpw" class="col-form-label">비밀번호</label></div>
+                        <div class="col-auto"><input type="password" name="userpw" id="userpw"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto">
+                        <div><button type="button" class="btn btn-primary">
+                            <i class="bi bi-box-arrow-in-right"></i>로그인</button></div>
+                </form>
+            </div>
+        </main>
+        <hr>
+        <footer>
+            <div class="text-center mb-3">Copyright &copy; 2024. siestageek. ALL RIGHTS RESERVED.</div>
+        </footer>
+    </div>
+</body>
+</html>
