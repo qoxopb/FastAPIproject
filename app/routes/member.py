@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.requests import Request
 
 from app.schemas.member import NewMember
+from app.services.member import MemberService
 
 member_router = APIRouter()
 
@@ -18,9 +19,15 @@ def join(req: Request):
         'join.html', {'request': req})
 
 @member_router.post('/join')
-def joinok(req: Request, mdto: NewMember):
-    print(mdto)
-    return 1
+def joincheck(mdto: NewMember):
+    result = MemberService.insert_member(mdto)
+    return result.rowcount
+
+@member_router.get('/joinok', response_class=HTMLResponse)
+def joinok(req: Request):
+    return templates.TemplateResponse(
+        'login.html', {'request': req})
+
 
 
 @member_router.get('/login', response_class=HTMLResponse)
