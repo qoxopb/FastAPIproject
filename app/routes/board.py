@@ -19,7 +19,8 @@ board_router.mount('/static', StaticFiles(directory='views/static'), name='stati
 
 @board_router.get('/list', response_class=HTMLResponse)
 def list(req: Request):
-    return templates.TemplateResponse('board/list.html', {'request': req})
+    bdlist = BoardService.select_board()
+    return templates.TemplateResponse('board/list.html', {'request': req, 'bdlist': bdlist})
 
 @board_router.get('/write', response_class=HTMLResponse)
 def write(req: Request):

@@ -41,21 +41,15 @@
             <td colspan="3"><a href="/board/write" class="btn btn-dark text-white">글쓰기</a></td>
         </tr>
         <tr><th>번호</th><th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th></tr>
-        <tr><td>1</td><td><a href="/board/view">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>2</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>3</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>4</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>5</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>6</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>7</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>8</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>9</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>10</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>11</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>12</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>13</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>14</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
-        <tr><td>15</td><td><a href="view.html">시간은 금이라구, 친구! 진짜라구, 친구!</a></td><td>siestageek</td><td>2020-10-10</td><td>7777</td></tr>
+
+        {% for bd in bdlist %}
+        <tr><td>{{ bd.bno }}</td>
+            <td><a href="/board/view">{{ bd.title }}</a></td>
+            <td>{{ bd.userid }}</td>
+            <td>{{ bd.regdate.strftime('%Y-%m-%d') }}</td>
+            <td>{{ bd.views }}</td></tr>
+        {% endfor %}
+
     </table>
 
     <ul class="pagination justify-content-center m-3">
