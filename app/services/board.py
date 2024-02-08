@@ -1,5 +1,5 @@
 import offset
-from sqlalchemy import insert, select, update
+from sqlalchemy import insert, select, update, func
 
 from app.dbfactory import Session
 from app.models.board import Board
@@ -30,13 +30,14 @@ class BoardService():
     @staticmethod
     def select_board(cpg):
         stnum = (cpg - 1) * 25
-        with (Session() as sess):
+        with Session() as sess:
+            cnt = sess.query(func.count(Board.bno)).scalar()        # 총 게시글 수
+
             stmt = select(Board.bno, Board.title, Board.userid, Board.regdate, Board.views)\
-            .order_by(Board.bno.desc())\
-            .offset(stnum).limit(25)
+            .order_by(Board.bno.desc()).offset(stnum).limit(25)
             result = sess.execute(stmt)
-            sess.commit()
-        return result
+
+        return result, cnt
 
 
 
