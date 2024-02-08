@@ -35,7 +35,7 @@ def writeok(bdto: NewBoard):
 
 @board_router.get('/view/{bno}', response_class=HTMLResponse)
 def view(req: Request, bno: str):
-    bd = BoardService.selectone_board(bno)
+    bd = BoardService.selectone_board(bno)[0]
     return templates.TemplateResponse(
         'board/view.html', {'request': req, 'bd': bd})
 

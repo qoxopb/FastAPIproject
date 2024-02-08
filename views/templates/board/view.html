@@ -14,7 +14,7 @@
     .dragup { vertical-align: top }
 
     /*버튼들*/
-    #view div:last-child { text-align: right; margin-right: 15px; }
+    #view > div:last-child { text-align: right; margin-right: 15px; }
 
 </style>
 {% endblock %}
@@ -26,21 +26,19 @@
         <div id="view" class="w-50 container">
             <div class="row">
                 <div class="col-auto"><label>제목</label></div>
-                <div class="col-auto"><span>시간은 금이라구, 친구! 진짜라구, 친구!, 참말이라구, 친구!</span></div>
+                <div class="col-auto"><span>{{ bd.title }}</span></div>
             </div>
             <div class="row">
                 <div class="col-auto"><label>작성자</label></div>
-                <div class="col-auto"><span>qwer</span></div>
+                <div class="col-auto"><span>{{ bd.userid }}</span></div>
             </div>
             <div class="row">
                 <div class="col-auto"><label>작성일</label></div>
-                <div class="col-auto"><span>2020-10-10</span></div>
+                <div class="col-auto"><span>{{ bd.regdate.strftime('%Y-%m-%d %H:%M:%S') }} ({{ bd.views }})</span></div>
 
                 <div class="row">
                     <div class="col-auto"><label class="dragup">본문</label></div>
-                    <div class="col-auto"><span span class="cnts">시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구!
-                    진짜라구, 친구!시간은 금이라구, 친구!진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!
-                    시간은 금이라구, 친구! 진짜라구, 친구!시간은 금이라구, 친구!진짜라구, 친구!시간은 금이라구, 친구! 진짜라구, 친구!</span></div>
+                    <div class="col-auto"><span span class="cnts">{{ bd.contents }}</span></div>
                 </div>
 
 
