@@ -33,7 +33,9 @@ def writeok(bdto: NewBoard):
     if result.rowcount > 0: res_url = '/board/list'
     return RedirectResponse(res_url, status_code=status.HTTP_302_FOUND)
 
-@board_router.get('/view', response_class=HTMLResponse)
-def view(req: Request):
-    return templates.TemplateResponse('board/view.html', {'request': req})
+@board_router.get('/view/{bno}', response_class=HTMLResponse)
+def view(req: Request, bno: str):
+    bd = BoardService.selectone_board(bno)
+    return templates.TemplateResponse(
+        'board/view.html', {'request': req, 'bd': bd})
 

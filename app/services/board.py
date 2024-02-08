@@ -27,12 +27,10 @@ class BoardService():
         return result
 
     @staticmethod
-    def select_board():
+    def selectone_board(bno):
         with (Session() as sess):
-            stmt = select(Board.bno, Board.title, Board.userid,
-                          Board.regdate, Board.views )\
-                .order_by(Board.bno.desc()).offset(0).limit(25)
-            result = sess.execute(stmt)
+            stmt = select(Board).filter_by(bno=bno)
+            result = sess.execute(stmt).first()
 
         return result
 
