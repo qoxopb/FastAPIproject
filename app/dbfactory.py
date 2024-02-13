@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from app.models import member
+from app.models import member, board
 from app.settings import config
 
 
@@ -14,3 +14,4 @@ Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 #서버시작시 테이블 생성
 def db_startup():
     member.Base.metadata.create_all(engine)
+    board.Base.metadata.create_all(engine)

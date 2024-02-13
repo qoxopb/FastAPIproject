@@ -7,7 +7,17 @@ from app.dbfactory import db_startup
 from app.routes.board import board_router
 from app.routes.member import member_router
 
-app = FastAPI()
+from contextlib import asynccontextmanager
+
+
+# 서버시작시 db 생성
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    yield
+    db_startup()
+
+
+app = FastAPI(lifespan=lifespan)
 
 # jinja2 설정
 templates = Jinja2Templates(directory='views/templates')
@@ -17,10 +27,6 @@ app.mount('/static', StaticFiles(directory='views/static'), name='static')
 app.include_router(member_router)
 app.include_router(board_router, prefix='/board')
 
-# 서버시작시 db 생성
-@app.on_event('startup')
-async  def on_startup():
-    db_startup()
 
 
 
@@ -33,7 +39,7 @@ async def index(req: Request):
 
 
 
-if __name__ == '_main__':
+if __name__ == '__main__':
     import uvicorn
     uvicorn.run('main.app', reload=True)
 
