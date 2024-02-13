@@ -52,12 +52,13 @@ def list(req: Request, cpg: int):
 
 
 @board_router.get('/list/{ftype}/{fkey}/{cpg}', response_class=HTMLResponse)
-def find(req: Request, ftype: str, fkey: str):
-    #stpg = int((cpg - 1) / 10) * 10 + 1   # 페이지네이션 시작값
-    bdlist = BoardService.find_select_board(ftype, '%'+fkey+'%')
-    #allpage = ceil(cnt /25)     #총페이지수
+def find(req: Request, ftype: str, fkey: str, cpg: int):
+    stpg = int((cpg - 1) / 10) * 10 + 1
+    bdlist, cnt = BoardService.find_select_board(ftype, '%'+fkey+'%', cpg)
+    allpage = ceil(cnt /25)
     return templates.TemplateResponse(
-        'board/list.html', {'request': req, 'bdlist': bdlist, 'cpg':1, 'stpg': 1, 'allpage': 10})
+        'board/list.html', {'request': req, 'bdlist': bdlist,
+                            'cpg':cpg, 'stpg': stpg, 'allpage': allpage})
 
 
 
