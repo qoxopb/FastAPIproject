@@ -60,20 +60,20 @@
         {% if cpg == 1 %} <li class="page-item disabled">
         {% else %} <li class="page-item"> {% endif %}
 
-            <a class="page-link" href="/board/list/{{ cpg - 1 }}">이전</a></li>
+            <a class="page-link" href="{{ baseurl }}{{ cpg - 1 }}">이전</a></li>
 
         {% for idx in range(stpg, stpg + 10) %}
             {% if idx <= allpage %}   <!--idx가 allpage보다 같거나 작으면 페이지네이션 출력-->
                 {% if cpg == idx %} <li class="page-item disabled">
                 {% else %} <li class="page-item"> {% endif %}
-                <a class="page-link" href="/board/list/{{ idx }}">{{ idx }}</a></li>
+                <a class="page-link" href="{{ baseurl }}{{ idx }}">{{ idx }}</a></li>
             {% endif %}
         {% endfor %}
 
         <!--현재페이지가 마지막 페이지라면 다음버튼 비활성-->
         {% if cpg == allpage %} <li class="page-item disabled">
         {% else %} <li class="page-item"> {% endif %}
-            <a class="page-link" href="/board/list/{{ cpg + 1 }}">다음</a></li>
+            <a class="page-link" href="{{ baseurl }}{{ cpg + 1 }}">다음</a></li>
     </ul>
 
 </main>
@@ -90,8 +90,30 @@
         let findurl = `http://127.0.0.1:8000/board/list`+params;
 
         location.href = findurl;
-
     });
+</script>
+
+<script>
+    //url의 상태에 따라 검색창 UI에 내용 채움
+    let findurl = location.pathname.split('/');
+    // console.log(findurl[3], findurl[4]);
+    if (findurl[4] !== undefined) {     //검색어가 입력되었다면
+        let classname = 'bg-warning text-white';
+        //검색어를 input 태그에 자동삽입
+        document.querySelector('#fkey').value = decodeURI(findurl[4]);
+        document.querySelector('#fkey').className = `form-control ${classname}`;
+
+        //검색유형을  select태그에 반영: selectedIndex 이용
+        let ftype = document.querySelector('#ftype');
+        ftype.className = `form-control ${classname}`;
+        switch (findurl[3]) {
+            case 'title': ftype.selectedIndex = 0; break;
+            case 'contents': ftype.selectedIndex = 1; break;
+            case 'userid': ftype.selectedIndex = 2; break;
+            case 'titconts': ftype.selectedIndex = 3; break;
+            case 'comments': ftype.selectedIndex = 4; break;
+        }
+    }
 </script>
 {% endblock %}
 
