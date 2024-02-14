@@ -1,0 +1,9 @@
+/* 레이아웃에 대한 스타일 */
+hr { background: black; height: 2px; opacity: 0.8; }
+main { min-height: 550px; }
+
+/* a 링크 관련 */
+a:link { text-decoration: none; font-weight: bold; color: black }
+a:visited { color: black }
+a:hover { text-decoration: underline; color: darkred; }
+a:active { color: red; }
