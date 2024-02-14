@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
@@ -7,10 +9,8 @@ from app.dbfactory import db_startup
 from app.routes.board import board_router
 from app.routes.member import member_router
 
-from contextlib import asynccontextmanager
 
-
-# 서버시작시 db 생성
+# 서버시작시 디비 생성
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     yield
@@ -18,6 +18,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan)
+
 
 # jinja2 설정
 templates = Jinja2Templates(directory='views/templates')
@@ -28,18 +29,12 @@ app.include_router(member_router)
 app.include_router(board_router, prefix='/board')
 
 
-
-
-
-
 @app.get("/", response_class=HTMLResponse)
 async def index(req: Request):
     return templates.TemplateResponse(
         'index.html', {'request': req})
 
 
-
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run('main.app', reload=True)
-
+    uvicorn.run('main:app', reload=True)
