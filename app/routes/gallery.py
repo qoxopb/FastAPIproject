@@ -1,6 +1,7 @@
 from math import ceil
 
-from fastapi import APIRouter
+from fastapi import APIRouter, File, UploadFile
+from fastapi import Form
 from fastapi.requests import Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -66,12 +67,22 @@ def write(req: Request):
 
 
 @gallery_router.post('/write')
-def writeok(bdto: NewBoard):
-    res_url = '/captcha_error'
-    if BoardService.check_captcha(bdto): # captcha 체크가 true라면
-        result = BoardService.insert_board(bdto)
-        res_url = '/write_error'
-        if result.rowcount > 0: res_url = '/gallery/list/1'
+async def writeok(title: str = Form(), userid: str = Form(),
+            contents: str = Form(), attach: UploadFile = File()):
+
+    res_url = '/gallery/list/1'
+
+    # print(title, userid, contents)
+    # print(attach.filename, attach.content_type, attach.size)
+
+    UPLOAD_DIR = 'C:/Java/nginx-1.25.3/html/cdn'
+    fname = UPLOAD_DIR + r'/20240214' + attach.filename
+
+    #비동기 처리를 위해 함수에 await 지시자 추가
+    # 이 경우 함수 정의부분에 async 지시자 추가 필요.
+    content = await attach.read()   #업로드한 파일의 내용을 비동기로 모두 읽어옴
+    with open(fname, 'wb') as f:
+        f.write(content)        # 파일 내용을 저장한 파일이름으로 저장
 
     return RedirectResponse(res_url, status_code=status.HTTP_302_FOUND)
 
@@ -82,6 +93,7 @@ def view(req: Request, gno: str):
     # BoardService.update_count_board(bno)
     return templates.TemplateResponse(
         'board/view.html', {'request': req, 'bd': None})
+
 
 
 
