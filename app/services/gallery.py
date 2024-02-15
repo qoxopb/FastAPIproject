@@ -4,7 +4,7 @@ from datetime import datetime
 import requests
 from sqlalchemy import insert, select, update, func, or_
 from app.dbfactory import Session
-from app.models.gallery import Gallery
+from app.models.gallery import Gallery, GalAttach
 
 # 이미지파일 저장경로 설정
 UPLOAD_DIR = 'C:/Java/nginx-1.25.3/html/cdn'
@@ -26,6 +26,12 @@ class GalleryService:
         data = GalleryService.gallery_convert(gdto)
         with Session() as sess:
             stmt = insert(Gallery).values(data)
+            result = sess.execute(stmt)
+            sess.commit()
+
+            data = {'fname': fname, 'fsize': fsize, 'gno': result.inserted_primary_key[0]}
+            print(result.inserted_primary_key)
+            stmt = insert(GalAttach).values(data)
             result = sess.execute(stmt)
             sess.commit()
 
