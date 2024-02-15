@@ -14,11 +14,17 @@ class Gallery(BaseModel):
         from_attributes = True
 
 
+class NewGallery(BaseModel):
+    title: str
+    userid: str
+    contents: str
+
 
 class GalAttach(BaseModel):
     gano: int
     gno: int
     fname: str
     fsize: int
-    class Config:
-        from_attributes = True
+
+class Config:
+    from_attributes = True
