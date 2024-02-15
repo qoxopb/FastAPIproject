@@ -22,19 +22,23 @@
         <div id="view" class="w-50 container">
             <div class="row">
                 <div class="col-auto"><label>제목</label></div>
-                <div class="col-auto"><span>{{ bd.title }}</span></div>
+                <div class="col-auto"><span>{{ g.title }}</span></div>
             </div>
             <div class="row">
                 <div class="col-auto"><label>작성자</label></div>
-                <div class="col-auto"><span>{{ bd.userid }}</span></div>
+                <div class="col-auto"><span>{{ g.userid }}</span></div>
             </div>
             <div class="row">
                 <div class="col-auto"><label>작성일</label></div>
-                <div class="col-auto"><span>{{ bd.regdate.strftime('%Y-%m-%d %H:%M:%S') }} ({{ bd.views }})</span></div>
+                <div class="col-auto"><span>{{ g.regdate.strftime('%Y-%m-%d %H:%M:%S') }} ({{ g.views }})</span></div>
             </div>
             <div class="row">
                 <div class="col-auto"><label class="dragup">본문</label></div>
-                <div class="col-auto"><span id="cnts">{{ bd.contents }}</span></div>
+                <div class="col-auto">
+                    <span id="cnts"><img src="http://localhost/cdn/{{ ga.fname }}"
+                         class="img-fluid"><br>
+                    {{ g.contents }}</span>
+                </div>
             </div>
             <div>
                 <button type="button" class="btn btn-success">
