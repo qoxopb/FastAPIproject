@@ -59,18 +59,19 @@ class GalleryService:
 
 
 
-    # @staticmethod
-    # def select_board(cpg):
-    #     stnum = (cpg - 1) * 25
-    #     with Session() as sess:
-    #         cnt = sess.query(func.count(Board.bno)).scalar() # 총게시글수
-    #
-    #         stmt = select(Board.bno, Board.title, Board.userid,
-    #                   Board.regdate, Board.views)\
-    #         .order_by(Board.bno.desc()).offset(stnum).limit(25)
-    #         result = sess.execute(stmt)
-    #
-    #     return result, cnt
+    @staticmethod
+    def select_gallery(cpg):
+        stnum = (cpg - 1) * 25
+        with Session() as sess:
+            cnt = sess.query(func.count(Gallery.gno)).scalar() # 총게시글수
+
+            stmt = select(Gallery.gno, Gallery.title, Gallery.userid,
+                          Gallery.regdate, Gallery.views, GalAttach.fname)\
+            .join_from(Gallery, GalAttach)\
+            .order_by(Gallery.gno.desc()).offset(stnum).limit(25)
+            result = sess.execute(stmt)
+
+        return result, cnt
 
 
     # @staticmethod
