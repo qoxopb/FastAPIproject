@@ -42,3 +42,8 @@ class MemberService():
 
 
 
+    @staticmethod
+    def selectone_member(userid):
+        with Session() as sess:
+            result = sess.query(Member).filter_by(userid=userid).scalar()
+            return result

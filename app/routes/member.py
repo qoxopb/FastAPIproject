@@ -59,4 +59,13 @@ def login(req: Request):
 
 @member_router.get('/myinfo', response_class=HTMLResponse)
 def myinfo(req: Request):
-    return templates.TemplateResponse('myinfo.html', {'request': req})
+    if 'm' not in req.session:
+        return RedirectResponse(url='/login', status_code=status.HTTP_303_SEE_OTHER)
+
+    myinfo = MemberService.selectone_member(req.session['m'])
+    return templates.TemplateResponse('myinfo.html',
+                                      {'request': req, 'my': myinfo})
+
+
+
+

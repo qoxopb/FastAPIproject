@@ -44,7 +44,12 @@
                                       class="btn btn-success">검색하기</button></div>
                 </div></td>
 
-                <td colspan="3"><a href="/board/write" class="btn btn-dark text-white">글쓰기</a></td>
+                <td colspan="3">
+                    {% if 'm' in request.session %}
+                    <a href="/board/write" class="btn btn-dark text-white">글쓰기</a>
+                    {% endif %}
+                </td>
+
             </tr>
             <tr><th>번호</th><th>제목</th><th>작성자</th>
                 <th>작성일</th><th>조회수</th></tr>

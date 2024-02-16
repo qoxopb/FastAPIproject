@@ -34,11 +34,13 @@
                                   class="btn btn-success">검색하기</button></div>
             </div>
 
-            <div class="col-4 text-end ms-4">
-                <a href="/gallery/write"
-                   class="btn btn-dark text-white"
-                   style="margin-right: -10px">글쓰기</a>
-            </div>
+            {% if 'm' in request.session %}
+                <div class="col-4 text-end ms-4">
+                    <a href="/gallery/write"
+                       class="btn btn-dark text-white"
+                       style="margin-right: -10px">글쓰기</a>
+                </div>
+            {% endif %}
         </div>
 
         <div class = "row justify-content-center">
