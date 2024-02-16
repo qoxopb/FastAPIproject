@@ -6,7 +6,7 @@
 * jinja2 template
 * pydantic_settings
 * python-multipart
-
+* itsdangerous
 
 
 
